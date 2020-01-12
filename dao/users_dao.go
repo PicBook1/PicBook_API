@@ -9,6 +9,26 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+type UsersDAO struct {
+	Server   string
+	Database string
+}
+
+var userdb *mgo.Database
+
+const (
+	user_COLLECTION = "users"
+)
+
+// Establish a connection to database
+func (m *UsersDAO) Connect() {
+	session, err := mgo.Dial(m.Server)
+	if err != nil {
+		log.Fatal(err)
+	}
+	userdb = session.DB(m.Database)
+}
+
 // Find list of users
 func (m *UsersDAO) FindAll() ([]User, error) {
 	var users []User
