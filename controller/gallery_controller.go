@@ -13,6 +13,17 @@ import (
 //var config = Config{}
 var gallery_dao = GallerysDAO{}
 
+
+// GET a gallery by its ID
+func AllGallerys(w http.ResponseWriter, r *http.Request) {
+	gallerys, err := gallery_dao.FindAll()
+	if err != nil {
+		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondWithJson(w, http.StatusOK, gallerys)
+}
+
 // GET a gallery by its ID
 func AllGallerys(w http.ResponseWriter, r *http.Request) {
 	gallerys, err := gallery_dao.FindAll()
