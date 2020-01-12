@@ -15,3 +15,10 @@ func (m *UsersDAO) FindAll() ([]User, error) {
 	err := userdb.C(user_COLLECTION).Find(bson.M{}).All(&users)
 	return users, err
 }
+
+
+// Update an existing user
+func (m *UsersDAO) Update(user User) error {
+	err := userdb.C(user_COLLECTION).UpdateId(user.Name, &user)
+	return err
+}
