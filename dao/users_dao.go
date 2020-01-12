@@ -22,3 +22,11 @@ func (m *UsersDAO) Update(user User) error {
 	err := userdb.C(user_COLLECTION).UpdateId(user.Name, &user)
 	return err
 }
+
+// Find a user by its name
+
+func (m *UsersDAO) FindByName(name string) (User, error) {
+	var user User
+	err := userdb.C(user_COLLECTION).Find(name).One(&user)
+	return user, err
+}
