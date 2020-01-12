@@ -17,3 +17,9 @@ type Gallery struct {
 	Comment     []Comment     `bson:"comment" json:"comment"`
 	Rating      int
 }
+
+type Fav struct {
+	ID        bson.ObjectId `bson:"_id" json:"id"`
+	UserId    string        `bson:"userid" json:"userid"`
+	GalleryId string        `bson:"galleryid" json:"galleryid"`
+}
