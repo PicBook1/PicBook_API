@@ -27,3 +27,14 @@ func AllUsers(w http.ResponseWriter, r *http.Request) {
 	}
 	respondWithJson(w, http.StatusOK, users)
 }
+
+// GET a user by its ID
+func FindUser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	user, err := user_dao.FindById(params["id"])
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
+		return
+	}
+	respondWithJson(w, http.StatusOK, user)
+}
