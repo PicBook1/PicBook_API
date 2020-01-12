@@ -16,8 +16,7 @@ func main() {
 	
 	r.HandleFunc("/users", controller.AllUsers).Methods("GET")
 	r.HandleFunc("/users", controller.UpdateUser).Methods("PUT")
-	r.HandleFunc("/users/{id}", controller.FindUser).Methods("GET")
-	r.HandleFunc("/users", controller.CreateUser).Methods("POST")
+	r.HandlerFunc("/users", controller.DeleteUser).Methods("DELETE")
 	
 if err := http.ListenAndServe(":8008", r); err != nil {
 		log.Fatal(err)
@@ -29,4 +28,4 @@ if err := http.ListenAndServe(":8008", r); err != nil {
 
 
 
-
+r.HandleFunc("/users/{id}", controller.FindUser).Methods("GET")
