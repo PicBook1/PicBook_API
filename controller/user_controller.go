@@ -38,3 +38,16 @@ func FindUser(w http.ResponseWriter, r *http.Request) {
 	}
 	respondWithJson(w, http.StatusOK, user)
 }
+
+func FindUserByEmail(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	user, err := user_dao.FindByEmail(params["email"])
+
+	fmt.Println(user.Email)
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, " You have User account")
+		return
+	}
+	respondWithJson(w, http.StatusOK, user)
+	return
+}
