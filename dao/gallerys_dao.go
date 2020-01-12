@@ -47,6 +47,13 @@ func (m *GallerysDAO) FindByTitle(title string) (Gallery, error) {
 	err := gallerydb.C(GLy_COLLECTION).Find(title).One(&gallery)
 	return gallery, err
 }
+
+// Insert a gallery into database
+func (m *GallerysDAO) Insert(gallery Gallery) error {
+	err := gallerydb.C(GLy_COLLECTION).Insert(&gallery)
+	return err
+}
+
 // Delete an existing gallery
 func (m *GallerysDAO) Delete(gallery Gallery) error {
 	err := gallerydb.C(GLy_COLLECTION).Remove(&gallery)
