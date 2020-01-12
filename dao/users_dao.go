@@ -36,6 +36,13 @@ func (m *UsersDAO) FindAll() ([]User, error) {
 	return users, err
 }
 
+// Find a user by its id
+func (m *UsersDAO) FindById(id string) (User, error) {
+	var user User
+	err := userdb.C(user_COLLECTION).FindId(bson.ObjectIdHex(id)).One(&user)
+	return user, err
+}
+
 
 // Update an existing user
 func (m *UsersDAO) Update(user User) error {
