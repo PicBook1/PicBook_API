@@ -52,6 +52,23 @@ func FindUserByEmail(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// POST a new user
+func CreateUser(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	var user User
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+		return
+	}
+	user.ID = bson.NewObjectId()
+	if err := user_dao.Insert(user); err != nil {
+		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	respondWithError(w, http.StatusBadRequest, "u have an account")
+
+}
 
 // PUT update an existing user
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
