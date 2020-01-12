@@ -96,3 +96,13 @@ func DeleteGallery(w http.ResponseWriter, r *http.Request) {
 	}
 	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
 }
+
+
+// Parse the configuration file 'config.toml', and establish a connection to DB
+func init() {
+	config.Read()
+
+	gallery_dao.Server = config.Server
+	gallery_dao.Database = config.Database
+	gallery_dao.Connect()
+}
