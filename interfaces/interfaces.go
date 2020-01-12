@@ -9,6 +9,14 @@ type UserInterface interface {
 	DeleteUser(id uint) (*models.User, []error)
 	Close()
 }
-
+type GalleryInterface interface {
+	Categories() ([]models.Gallery, []error)
+	Gallery(id uint) (*models.Gallery, []error)
+	UpdateGallery(gallery *models.Gallery) (*models.Gallery, []error)
+	DeleteGallery(id uint) (*models.Gallery, []error)
+	StoreGallery(gallery *models.Gallery) (*models.Gallery, []error)
+	SearchGallery(title string) (models.Gallery, []error)
+	
+}
 
 
