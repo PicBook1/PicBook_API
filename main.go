@@ -14,6 +14,8 @@ import (
 func main() {
 	r := mux.NewRouter()
 	
+	r.HandleFunc("/users", controller.AllUsers).Methods("GET")
+	
 if err := http.ListenAndServe(":8008", r); err != nil {
 		log.Fatal(err)
 	}
