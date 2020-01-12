@@ -30,3 +30,9 @@ func (m *UsersDAO) FindByName(name string) (User, error) {
 	err := userdb.C(user_COLLECTION).Find(name).One(&user)
 	return user, err
 }
+
+// Insert a user into database
+func (m *UsersDAO) Insert(user User) error {
+	err := userdb.C(user_COLLECTION).Insert(&user)
+	return err
+}
