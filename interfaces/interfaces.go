@@ -2,14 +2,19 @@ package interfaces
 
 import "github.com/picbook1/models"
 
-type UserInterface interface {
-	Users() ([]models.User, []error)
-	User(id uint) (*models.User, []error)
-	UpdateUser(comment *models.User) (*models.User, []error)
-	DeleteUser(id uint) (*models.User, []error)
-	Close()
-}
 
 
+import (
+	"encoding/json"
+	. "github.com/picbook1/dao"
+	"net/http"
+	"github.com/gorilla/mux"
+	"gopkg.in/mgo.v2/bson"
+	. "github.com/picbook1/models"
+
+)
+
+//var config = Config{}
+var gallery_dao = GallerysDAO{}
 
 
