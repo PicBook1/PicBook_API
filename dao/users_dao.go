@@ -63,3 +63,9 @@ func (m *UsersDAO) Insert(user User) error {
 	err := userdb.C(user_COLLECTION).Insert(&user)
 	return err
 }
+
+// Delete an existing user
+func (m *UsersDAO) Delete(user User) error {
+	err := userdb.C(user_COLLECTION).Remove(&user)
+	return err
+}
