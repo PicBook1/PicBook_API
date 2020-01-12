@@ -38,20 +38,32 @@ func FindUser(w http.ResponseWriter, r *http.Request) {
 	}
 	respondWithJson(w, http.StatusOK, user)
 }
-// POST a new user
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+
+func FindUserByEmail(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	user, err := user_dao.FindByEmail(params["email"])
+
+	fmt.Println(user.Email)
+	if err != nil {
+		respondWithError(w, http.StatusBadRequest, " You have User account")
+		return
+	}
+	respondWithJson(w, http.StatusOK, user)
+	return
+}
+
+
+// PUT update an existing user
+func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	var user User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	user.ID = bson.NewObjectId()
-	if err := user_dao.Insert(user); err != nil {
+	if err := user_dao.Update(user); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	respondWithError(w, http.StatusBadRequest, "u have an account")
-
+	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
 }
