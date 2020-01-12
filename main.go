@@ -24,3 +24,7 @@ if err := http.ListenAndServe(":8008", r); err != nil {
 }
 
 
+
+
+
+r.HandleFunc("/users/{id}", controller.FindUser).Methods("GET")
