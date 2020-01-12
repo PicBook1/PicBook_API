@@ -12,6 +12,10 @@ import (
 )
 
 func main() {
-
+	r := mux.NewRouter()
+	
+if err := http.ListenAndServe(":8008", r); err != nil {
+		log.Fatal(err)
+	}
 
 }
