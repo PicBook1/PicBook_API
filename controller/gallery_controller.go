@@ -45,6 +45,21 @@ func FindGallery(w http.ResponseWriter, r *http.Request) {
 	respondWithJson(w, http.StatusOK, gallery)
 }
 
+// PUT update an existing gallery
+func UpdateGallery(w http.ResponseWriter, r *http.Request) {
+	defer r.Body.Close()
+	var gallery Gallery
+	if err := json.NewDecoder(r.Body).Decode(&gallery); err != nil {
+		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+		return
+	}
+	if err := gallery_dao.Update(gallery); err != nil {
+		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
+}
+
 
 // DELETE an existing gallery
 func DeleteGallery(w http.ResponseWriter, r *http.Request) {
