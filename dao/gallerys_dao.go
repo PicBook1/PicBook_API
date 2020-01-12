@@ -35,3 +35,11 @@ func (m *GallerysDAO) FindAll() ([]Gallery, error) {
 	err := gallerydb.C(GLy_COLLECTION).Find(bson.M{}).All(&gallerys)
 	return gallerys, err
 }
+
+// Find a gallery by its id
+func (m *GallerysDAO) FindById(id string) (Gallery, error) {
+	var gallery Gallery
+	err := gallerydb.C(GLy_COLLECTION).FindId(bson.ObjectIdHex(id)).One(&gallery)
+	return gallery, err
+}
+
