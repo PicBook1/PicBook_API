@@ -31,6 +31,13 @@ func (m *UsersDAO) FindByName(name string) (User, error) {
 	return user, err
 }
 
+// Find a user by its email
+func (m *UsersDAO) FindByEmail(email string) (User, error) {
+	var user User
+	err := userdb.C(user_COLLECTION).Find(email).One(&user)
+	return user, err
+}
+
 // Insert a user into database
 func (m *UsersDAO) Insert(user User) error {
 	err := userdb.C(user_COLLECTION).Insert(&user)
