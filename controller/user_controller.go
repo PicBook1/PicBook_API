@@ -96,3 +96,10 @@ func respondWithJson(w http.ResponseWriter, code int, payload interface{}) {
 	w.Write(response)
 }
 
+func init() {
+	config.Read()
+
+	user_dao.Server = config.Server
+	user_dao.Database = config.Database
+	user_dao.Connect()
+}
