@@ -16,6 +16,7 @@ func main() {
 	r.HandleFunc("/gallerys", controller.AllGallerys).Methods("GET")
 	r.HandleFunc("/gallerys", controller.UpdateGallery).Methods("PUT")
 	
+	r.HandleFunc("/gallerys", controller.DeleteGallery).Methods("DELETE")
 	
 	r.HandleFunc("/users", controller.AllUsers).Methods("GET")
 	r.HandleFunc("/users", controller.UpdateUser).Methods("PUT")
