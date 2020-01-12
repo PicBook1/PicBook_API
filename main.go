@@ -13,6 +13,8 @@ import (
 
 func main() {
 	r := mux.NewRouter()
+	r.HandleFunc("/gallerys", controller.AllGallerys).Methods("GET")
+	
 	
 	r.HandleFunc("/users", controller.AllUsers).Methods("GET")
 	r.HandleFunc("/users", controller.UpdateUser).Methods("PUT")
