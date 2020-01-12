@@ -38,3 +38,17 @@ type Fav struct {
 	UserId    string        `bson:"userid" json:"userid"`
 	GalleryId string        `bson:"galleryid" json:"galleryid"`
 }
+
+type SignUpForm struct {
+	PageTitle  string
+	FieldNames []string
+	Fields     map[string]string
+	Errors     map[string]string
+}
+
+func SHA256OfString(input string) string {
+
+	sum := sha256.Sum256([]byte(input))
+	return fmt.Sprintf("%x", sum)
+
+}
