@@ -42,4 +42,8 @@ func (m *GallerysDAO) FindById(id string) (Gallery, error) {
 	err := gallerydb.C(GLy_COLLECTION).FindId(bson.ObjectIdHex(id)).One(&gallery)
 	return gallery, err
 }
-
+func (m *GallerysDAO) FindByTitle(title string) (Gallery, error) {
+	var gallery Gallery
+	err := gallerydb.C(GLy_COLLECTION).Find(title).One(&gallery)
+	return gallery, err
+}
